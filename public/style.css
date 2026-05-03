@@ -3,7 +3,7 @@ body {
     width: 100vw;
     min-height: 100vh;
     overflow: auto;
-    cursor: url("./resources/cursor.cur"), default;
+    cursor: url("./resources/cursor.png") 0 0, default;
 }
 
 .piano-container {
@@ -21,7 +21,7 @@ body {
 
 .key-overlay {
     position: absolute;
-    cursor: url("./resources/cursor.cur"), default;
+    cursor: url("./resources/cursor.png") 0 0, auto;
     border-radius: 0 0 4px 4px;
 }
 
