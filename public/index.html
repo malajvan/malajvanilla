@@ -5,45 +5,109 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <title>The web site of malajvanilla</title>
-    <link href="/style.css" rel="stylesheet" type="text/css" media="all">
+    <link href="style.css" rel="stylesheet" type="text/css" media="all">
   </head>
   <body>
     <h1>Welcome to malajvanilla!</h1>
+    <h3> Play some piano :) </h3>
+ 
 
-  <p>Current cute cool bae:</p>
-<iframe style="border-radius:12px" 
-  src="https://open.spotify.com/embed/track/016HKF7A4O7tatoJ9BgZM1?utm_source=generator&amp;theme=0" 
-  width="300" 
-  height="152" 
-  frameBorder="0" 
-  allowfullscreen="" 
-  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-  loading="lazy">
-</iframe>
+    <!-- Piano: adjust left/top/width/height percentages to fine-tune key positions -->
+    <div class="piano-container">
+      <img src="resources/piano.png" class="piano-img" alt="Piano keyboard">
 
-<p><a href="https://malajvanilla.neocities.org/journal">Journal Page</a> here. I write here and there, and I love yapping and sharing my unsolicited thoughts so feel free to read and message me if you want to talk about anything :D</p>
+      <!-- C3 — 130.81 Hz -->
+      <a href="#" class="key-overlay" data-label="Music" data-freq="130.81" style="left: 32.8%; top: 48%; width: 3%; height: 49%;"></a>
 
+      <!-- C4 (middle C) — 261.63 Hz -->
+      <a href="https://malajvanilla.neocities.org/journal"  class="key-overlay" data-label="Journal" data-freq="261.63" style="left: 53.6%; top: 40%; width: 3%; height: 54%;"></a>
 
-<p>I also make make music sometimes :3 Check out the ONE proper song i made here</p>
-<iframe width="300" height="200" src="https://www.youtube.com/embed/IEWL8HXGDVg" title="Dated (ft. Chí Hùng) - Vân Phạm"
-  frameborder="0"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-  referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      <!-- C5 — 523.25 Hz -->
+      <a href="#" class="key-overlay" data-label="Guestbook" data-freq="523.25" style="left: 74.4%; top: 48%; width: 3%; height: 49%;"></a>
+    </div>
 
-<p>and other cuties on SoundCloud</p>
-<div style="left: 0; width: 100; height: 200px; position: relative;"><iframe
-    src="https://w.soundcloud.com/player/?visual=true&url=https%3A%2F%2Fapi.soundcloud.com%2Fplaylists%2F1620579250&show_artwork=false&show_comments=false"
-    style="top: 0; left: 0; width: 100; height: 200; position: absolute; border: 0;" allowfullscreen></iframe></div>
+    <div id="tooltip"></div>
 
+    <script>
+      const tooltip = document.getElementById('tooltip');
+      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
-<p>Running list of chores~</p> 
-<ul>
-  <li>Make landing page</li>
-  <li>tweak quartz for aesthetics (if i feel crazy)</li>
-  <li>Actually figure out what i want to do in life</li>
-  <li>Music review cuz my taste the best</li>
-  <li>Guestbook??</li>
+      // Browsers suspend AudioContext until a user gesture — resume on first interaction
+      document.addEventListener('click', () => audioCtx.resume(), { once: true });
+      document.addEventListener('mousemove', () => audioCtx.resume(), { once: true });
 
-</ul>  
+      function playNote(freq) {
+        const gain = audioCtx.createGain();
+        const osc  = audioCtx.createOscillator();
+        const osc2 = audioCtx.createOscillator();
+
+        osc.type  = 'triangle';
+        osc2.type = 'sine';
+        osc.frequency.value  = freq;
+        osc2.frequency.value = freq * 2; // first overtone, softens the tone
+
+        const g2 = audioCtx.createGain();
+        osc.connect(gain);
+        osc2.connect(g2);
+        gain.connect(audioCtx.destination);
+        g2.connect(audioCtx.destination);
+
+        const t = audioCtx.currentTime;
+        gain.gain.setValueAtTime(0.28, t);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + 1.8);
+        g2.gain.setValueAtTime(0.10, t);
+        g2.gain.exponentialRampToValueAtTime(0.001, t + 0.9);
+
+        osc.start(t);  osc.stop(t + 1.8);
+        osc2.start(t); osc2.stop(t + 0.9);
+      }
+
+      document.querySelectorAll('.key-overlay').forEach(key => {
+        key.addEventListener('mouseenter', () => {
+          tooltip.textContent = key.dataset.label;
+          tooltip.style.display = 'block';
+          playNote(parseFloat(key.dataset.freq));
+        });
+        key.addEventListener('mouseleave', () => {
+          tooltip.style.display = 'none';
+        });
+      });
+
+      document.addEventListener('mousemove', (e) => {
+        tooltip.style.left = (e.clientX + 16) + 'px';
+        tooltip.style.top  = (e.clientY - 12) + 'px';
+      });
+    </script>
+
+      <p>Current cute cool bae:</p>
+      <iframe style="border-radius:12px"
+        src="https://open.spotify.com/embed/track/016HKF7A4O7tatoJ9BgZM1?utm_source=generator&amp;theme=0" width="300"
+        height="152" frameBorder="0" allowfullscreen=""
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy">
+      </iframe>
+      
+      <p><a href="https://malajvanilla.neocities.org/journal">Journal Page</a> here. I write here and there, and I love
+        yapping and sharing my unsolicited thoughts so feel free to read and message me if you want to talk about anything :D
+      </p>
+      
+      <p>I also make make music sometimes :3 Check out the ONE proper song i made here</p>
+      <iframe width="300" height="200" src="https://www.youtube.com/embed/IEWL8HXGDVg" title="Dated (ft. Chí Hùng) - Vân Phạm"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      
+      <p>and other cuties on SoundCloud</p>
+      <div style="left: 0; width: 100; height: 200px; position: relative;"><iframe
+          src="https://w.soundcloud.com/player/?visual=true&url=https%3A%2F%2Fapi.soundcloud.com%2Fplaylists%2F1620579250&show_artwork=false&show_comments=false"
+          style="top: 0; left: 0; width: 100; height: 200; position: absolute; border: 0;" allowfullscreen></iframe></div>
+      
+      <p>Running list of chores~</p>
+      <ul>
+        <li>Make landing page</li>
+        <li>tweak quartz for aesthetics (if i feel crazy)</li>
+        <li>Actually figure out what i want to do in life</li>
+        <li>Music review cuz my taste the best</li>
+        <li>Guestbook??</li>
+      </ul>
   </body>
 </html>
