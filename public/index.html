@@ -15,15 +15,26 @@
     <!-- Piano: adjust left/top/width/height percentages to fine-tune key positions -->
     <div class="piano-container">
       <img src="resources/piano.png" class="piano-img" alt="Piano keyboard">
+      <!-- C3 -->
+      <a href="#" class="key-overlay" data-label="About" data-freq="130.81" style="left: 33.9%; top: 48%; width: 3%; height: 49%;"></a>
+      <!-- G3 -->
+      <a href="#" class="key-overlay" data-label="TBD" data-freq="196.00" style="left: 44.5%; top: 48%; width: 3%; height: 49%;"></a>
 
-      <!-- C3 — 130.81 Hz -->
-      <a href="#" class="key-overlay" data-label="Music" data-freq="130.81" style="left: 32.8%; top: 48%; width: 3%; height: 49%;"></a>
+      <!-- C4 -->
+      <a href="#" class="key-overlay" data-label="TBD" data-freq="261.63" style="left: 54%; top: 48%; width: 3%; height: 49%;"></a>
 
-      <!-- C4 (middle C) — 261.63 Hz -->
-      <a href="https://malajvanilla.neocities.org/journal"  class="key-overlay" data-label="Journal" data-freq="261.63" style="left: 53.6%; top: 40%; width: 3%; height: 54%;"></a>
+      <!-- E4 -->
+      <a href="https://malajvanilla.neocities.org/journal" class="key-overlay" data-label="Journal" data-freq="329.63" style="left: 59.5%; top: 48%; width: 3%; height: 49%;"></a>
 
-      <!-- C5 — 523.25 Hz -->
-      <a href="#" class="key-overlay" data-label="Guestbook" data-freq="523.25" style="left: 74.4%; top: 48%; width: 3%; height: 49%;"></a>
+      <!-- G4 -->
+      <a href="#" class="key-overlay" data-label="Music" data-freq="392.00" style="left: 64.5%; top: 48%; width: 3%; height: 49%;"></a>
+
+      <!-- B4 -->
+      <a href="#" class="key-overlay" data-label="Pikachu Volleyball" data-freq="493.88" style="left: 70.5%; top: 48%; width: 3%; height: 49%;"></a>
+
+      <!-- D5 -->
+      <a href="#" class="key-overlay" data-label="Guestbook" data-freq="587.33" style="left: 76%; top: 48%; width: 3%; height: 49%;"></a>
+
     </div>
 
     <div id="tooltip"></div>
@@ -54,12 +65,12 @@
 
         const t = audioCtx.currentTime;
         gain.gain.setValueAtTime(0.28, t);
-        gain.gain.exponentialRampToValueAtTime(0.001, t + 1.8);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + 3.5);
         g2.gain.setValueAtTime(0.10, t);
-        g2.gain.exponentialRampToValueAtTime(0.001, t + 0.9);
+        g2.gain.exponentialRampToValueAtTime(0.001, t + 1.8);
 
-        osc.start(t);  osc.stop(t + 1.8);
-        osc2.start(t); osc2.stop(t + 0.9);
+        osc.start(t);  osc.stop(t + 3.5);
+        osc2.start(t); osc2.stop(t + 1.8);
       }
 
       document.querySelectorAll('.key-overlay').forEach(key => {
