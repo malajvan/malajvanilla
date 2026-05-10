@@ -11,9 +11,74 @@
   <link href="https://fonts.googleapis.com/css2?family=Coming+Soon&display=swap" rel="stylesheet">
 
   <link href="./style.css" rel="stylesheet" type="text/css" media="all">
+  <style>
+    .bg-photo {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-image: url('./resources/unicorn.png');
+      background-size: cover;
+      background-position: center;
+      z-index: -2;
+    }
+
+    #unicorn-bounce {
+      position: fixed;
+      width: 35px;
+      height: auto;
+      z-index: 10;
+      cursor: pointer;
+    }
+  </style>
 </head>
 
 <body>
+  <div class="bg-photo"></div>
+  <img id="unicorn-bounce" src="./resources/unicornbouncelogo.png" alt="">
+  <script>
+    const unicorn = document.getElementById('unicorn-bounce');
+    let x = 100, y = 100, dx = 3.8, dy = 3.2, hue = 0, flipX = 1, flipY = 1, size = 35;
+    let touchingX = false, touchingY = false;
+
+    function bounce() {
+      const w = unicorn.offsetWidth;
+      const h = unicorn.offsetHeight;
+      const maxX = window.innerWidth - w;
+      const maxY = window.innerHeight - h;
+
+      x += dx;
+      y += dy;
+
+      let hitX = false, hitY = false;
+      if (x <= 0 || x >= maxX) {
+        if (!touchingX) { dx = -dx; flipX *= -1; hue = (hue + 47) % 360; hitX = true; touchingX = true; }
+        x = Math.max(0, Math.min(x, maxX));
+      } else { touchingX = false; }
+
+      if (y <= 0 || y >= maxY) {
+        if (!touchingY) { dy = -dy; flipY *= -1; hue = (hue + 47) % 360; hitY = true; touchingY = true; }
+        y = Math.max(0, Math.min(y, maxY));
+      } else { touchingY = false; }
+
+      if (hitX || hitY) {
+        size = Math.round(size * 1.36);
+        unicorn.style.width = size + 'px';
+      }
+
+      unicorn.style.left = x + 'px';
+      unicorn.style.top = y + 'px';
+      unicorn.style.transform = `scaleX(${flipX}) scaleY(${flipY})`;
+      unicorn.style.filter = `hue-rotate(${hue}deg) saturate(5) brightness(0.85)`;
+      requestAnimationFrame(bounce);
+    }
+
+    unicorn.addEventListener('load', bounce);
+    if (unicorn.complete) bounce();
+
+    unicorn.addEventListener('click', () => window.location.href = './sub-page/unicorn.html');
+  </script>
   <h1>malajvanilla</h1>
   <p> Play some piano :) </p>
 
@@ -113,7 +178,7 @@
       key.addEventListener('mouseenter', () => {
         tooltip.textContent = key.dataset.label;
         tooltip.style.display = 'block';
-        if (soundEnabled)  playNote(parseFloat(key.dataset.freq));
+        if (soundEnabled) playNote(parseFloat(key.dataset.freq));
       });
       key.addEventListener('mouseleave', () => {
         tooltip.style.display = 'none';
@@ -126,7 +191,7 @@
     });
   </script>
 
- 
+
 </body>
 
 </html>
