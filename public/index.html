@@ -1,124 +1,162 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="referrer" content="strict-origin-when-cross-origin" />
-    <title>The web site of malajvanilla</title>
-    <link href="./style.css" rel="stylesheet" type="text/css" media="all">
-  </head>
-  <body>
-    <h1>Welcome to malajvanilla!</h1>
-    <h3> Play some piano :) </h3>
- 
 
-    <!-- Piano: adjust left/top/width/height percentages to fine-tune key positions -->
-    <div class="piano-container">
-      <img src="resources/piano.png" class="piano-img" alt="Piano keyboard">
-      <!-- C3 -->
-      <a href="#" class="key-overlay" data-label="About" data-freq="130.81" style="left: 33.9%; top: 48%; width: 3%; height: 49%;"></a>
-      <!-- G3 -->
-      <a href="#" class="key-overlay" data-label="TBD" data-freq="196.00" style="left: 44.5%; top: 48%; width: 3%; height: 49%;"></a>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <title>The web site of malajvanilla</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Coming+Soon&display=swap" rel="stylesheet">
 
-      <!-- C4 -->
-      <a href="#" class="key-overlay" data-label="TBD" data-freq="261.63" style="left: 54%; top: 48%; width: 3%; height: 49%;"></a>
+  <link href="./style.css" rel="stylesheet" type="text/css" media="all">
+</head>
 
-      <!-- E4 -->
-      <a href="https://malajvanilla.neocities.org/journal" class="key-overlay" data-label="Journal" data-freq="329.63" style="left: 59.5%; top: 48%; width: 3%; height: 49%;"></a>
+<body>
+  <h1>malajvanilla</h1>
+  <p> Play some piano :) </p>
 
-      <!-- G4 -->
-      <a href="#" class="key-overlay" data-label="Music" data-freq="392.00" style="left: 64.5%; top: 48%; width: 3%; height: 49%;"></a>
 
-      <!-- B4 -->
-      <a href="#" class="key-overlay" data-label="Pikachu Volleyball" data-freq="493.88" style="left: 70.5%; top: 48%; width: 3%; height: 49%;"></a>
+  <!-- Piano: adjust left/top/width/height percentages to fine-tune key positions -->
+  <div class="piano-container">
+    <img src="resources/piano.png" class="piano-img" alt="Piano keyboard">
 
-      <!-- D5 -->
-      <a href="#" class="key-overlay" data-label="Guestbook" data-freq="587.33" style="left: 76%; top: 48%; width: 3%; height: 49%;"></a>
+    <button id="piano-toggle" title="Sound: OFF" style="
+      position: absolute; top: 8%; left: 2%;
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      background: #ff3b3b;
+      border: 2px solid rgba(255,255,255,0.2);
+      cursor: pointer;
+      box-shadow: 0 0 8px 3px rgba(255,59,59,0.7), inset 0 0 4px rgba(255,255,255,0.2);
+      padding: 0;
+    "></button>
+    <!-- C3 -->
+    <a href="./sub-page/about.html" class="key-overlay" data-label="About" data-freq="130.81"
+      style="left: 33.9%; top: 48%; width: 3%; height: 49%;"></a>
+    <!-- G3 -->
+    <a href="./sub-page/book.html" class="key-overlay" data-label="Book" data-freq="196.00"
+      style="left: 44.5%; top: 48%; width: 3%; height: 49%;"></a>
 
-    </div>
+    <!-- C4 -->
+    <a href="./sub-page/tbd.html" class="key-overlay" data-label="TBD" data-freq="261.63"
+      style="left: 54%; top: 48%; width: 3%; height: 49%;"></a>
 
-    <div id="tooltip"></div>
+    <!-- E4 -->
+    <a href="https://malajvanilla.neocities.org/journal" class="key-overlay" data-label="Journal" data-freq="329.63"
+      style="left: 59.5%; top: 48%; width: 3%; height: 49%;"></a>
 
-    <script>
-      const tooltip = document.getElementById('tooltip');
-      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    <!-- G4 -->
+    <a href="./sub-page/music.html" class="key-overlay" data-label="Music" data-freq="392.00"
+      style="left: 64.5%; top: 48%; width: 3%; height: 49%;"></a>
 
-      // Browsers suspend AudioContext until a user gesture — resume on first interaction
-      document.addEventListener('click', () => audioCtx.resume(), { once: true });
-      document.addEventListener('mousemove', () => audioCtx.resume(), { once: true });
+    <!-- B4 -->
+    <a href="./sub-page/pikachu-volleyball.html" class="key-overlay" data-label="Pikachu Volleyball" data-freq="493.88"
+      style="left: 70.5%; top: 48%; width: 3%; height: 49%;"></a>
 
-      function playNote(freq) {
-        const gain = audioCtx.createGain();
-        const osc  = audioCtx.createOscillator();
-        const osc2 = audioCtx.createOscillator();
+    <!-- D5 -->
+    <a href="./sub-page/guestbook.html" class="key-overlay" data-label="Guestbook" data-freq="587.33"
+      style="left: 76%; top: 48%; width: 3%; height: 49%;"></a>
 
-        osc.type  = 'triangle';
-        osc2.type = 'sine';
-        osc.frequency.value  = freq;
-        osc2.frequency.value = freq * 2; // first overtone, softens the tone
+  </div>
 
-        const g2 = audioCtx.createGain();
-        osc.connect(gain);
-        osc2.connect(g2);
-        gain.connect(audioCtx.destination);
-        g2.connect(audioCtx.destination);
+  <div id="tooltip"></div>
 
-        const t = audioCtx.currentTime;
-        gain.gain.setValueAtTime(0.28, t);
-        gain.gain.exponentialRampToValueAtTime(0.001, t + 3.5);
-        g2.gain.setValueAtTime(0.10, t);
-        g2.gain.exponentialRampToValueAtTime(0.001, t + 1.8);
+  <script>
+    let soundEnabled = false;
 
-        osc.start(t);  osc.stop(t + 3.5);
-        osc2.start(t); osc2.stop(t + 1.8);
-      }
+    const toggle = document.getElementById('piano-toggle');
+    toggle.addEventListener('click', () => {
+      soundEnabled = !soundEnabled;
+      toggle.style.background = soundEnabled ? '#3bff6b' : '#ff3b3b';
+      toggle.style.boxShadow = soundEnabled
+        ? '0 0 8px 3px rgba(59,255,107,0.7), inset 0 0 4px rgba(255,255,255,0.2)'
+        : '0 0 8px 3px rgba(255,59,59,0.7), inset 0 0 4px rgba(255,255,255,0.2)';
+      toggle.title = soundEnabled ? 'Sound: ON' : 'Sound: OFF';
+    });
 
-      document.querySelectorAll('.key-overlay').forEach(key => {
-        key.addEventListener('mouseenter', () => {
-          tooltip.textContent = key.dataset.label;
-          tooltip.style.display = 'block';
-          playNote(parseFloat(key.dataset.freq));
-        });
-        key.addEventListener('mouseleave', () => {
-          tooltip.style.display = 'none';
-        });
+    const tooltip = document.getElementById('tooltip');
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+    // Browsers suspend AudioContext until a user gesture — resume on first interaction
+    document.addEventListener('click', () => audioCtx.resume(), { once: true });
+    document.addEventListener('mousemove', () => audioCtx.resume(), { once: true });
+
+    function playNote(freq) {
+      const gain = audioCtx.createGain();
+      const osc = audioCtx.createOscillator();
+      const osc2 = audioCtx.createOscillator();
+
+      osc.type = 'triangle';
+      osc2.type = 'sine';
+      osc.frequency.value = freq;
+      osc2.frequency.value = freq * 2; // first overtone, softens the tone
+
+      const g2 = audioCtx.createGain();
+      osc.connect(gain);
+      osc2.connect(g2);
+      gain.connect(audioCtx.destination);
+      g2.connect(audioCtx.destination);
+
+      const t = audioCtx.currentTime;
+      gain.gain.setValueAtTime(0.28, t);
+      gain.gain.exponentialRampToValueAtTime(0.001, t + 3.5);
+      g2.gain.setValueAtTime(0.10, t);
+      g2.gain.exponentialRampToValueAtTime(0.001, t + 1.8);
+
+      osc.start(t); osc.stop(t + 3.5);
+      osc2.start(t); osc2.stop(t + 1.8);
+    }
+
+    document.querySelectorAll('.key-overlay').forEach(key => {
+      key.addEventListener('mouseenter', () => {
+        tooltip.textContent = key.dataset.label;
+        tooltip.style.display = 'block';
+        if (soundEnabled)  playNote(parseFloat(key.dataset.freq));
       });
-
-      document.addEventListener('mousemove', (e) => {
-        tooltip.style.left = (e.clientX + 16) + 'px';
-        tooltip.style.top  = (e.clientY - 12) + 'px';
+      key.addEventListener('mouseleave', () => {
+        tooltip.style.display = 'none';
       });
-    </script>
+    });
 
-      <p>Current cute cool bae:</p>
-      <iframe style="border-radius:12px"
-        src="https://open.spotify.com/embed/track/016HKF7A4O7tatoJ9BgZM1?utm_source=generator&amp;theme=0" width="300"
-        height="152" frameBorder="0" allowfullscreen=""
-        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy">
-      </iframe>
-      
-      <p><a href="https://malajvanilla.neocities.org/journal">Journal Page</a> here. I write here and there, and I love
-        yapping and sharing my unsolicited thoughts so feel free to read and message me if you want to talk about anything :D
-      </p>
-      
-      <p>I also make make music sometimes :3 Check out the ONE proper song i made here</p>
-      <iframe width="300" height="200" src="https://www.youtube.com/embed/IEWL8HXGDVg" title="Dated (ft. Chí Hùng) - Vân Phạm"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-      
-      <p>and other cuties on SoundCloud</p>
-      <div style="left: 0; width: 100; height: 200px; position: relative;"><iframe
-          src="https://w.soundcloud.com/player/?visual=true&url=https%3A%2F%2Fapi.soundcloud.com%2Fplaylists%2F1620579250&show_artwork=false&show_comments=false"
-          style="top: 0; left: 0; width: 100; height: 200; position: absolute; border: 0;" allowfullscreen></iframe></div>
-      
-      <p>Running list of chores~</p>
-      <ul>
-        <li>Make landing page</li>
-        <li>tweak quartz for aesthetics (if i feel crazy)</li>
-        <li>Actually figure out what i want to do in life</li>
-        <li>Music review cuz my taste the best</li>
-        <li>Guestbook??</li>
-      </ul>
-  </body>
+    document.addEventListener('mousemove', (e) => {
+      tooltip.style.left = (e.clientX + 16) + 'px';
+      tooltip.style.top = (e.clientY - 12) + 'px';
+    });
+  </script>
+
+  <p>Current cute cool bae:</p>
+  <iframe style="border-radius:12px"
+    src="https://open.spotify.com/embed/track/016HKF7A4O7tatoJ9BgZM1?utm_source=generator&amp;theme=0" width="300"
+    height="152" frameBorder="0" allowfullscreen=""
+    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy">
+  </iframe>
+
+  <p><a href="https://malajvanilla.neocities.org/journal">Journal Page</a> here. I write here and there, and I love
+    yapping and sharing my unsolicited thoughts so feel free to read and message me if you want to talk about anything
+    :D
+  </p>
+
+  <p>I also make make music sometimes :3 Check out the ONE proper song i made here</p>
+  <iframe width="300" height="200" src="https://www.youtube.com/embed/IEWL8HXGDVg"
+    title="Dated (ft. Chí Hùng) - Vân Phạm" frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+  <p>and other cuties on SoundCloud</p>
+  <div style="left: 0; width: 100; height: 200px; position: relative;"><iframe
+      src="https://w.soundcloud.com/player/?visual=true&url=https%3A%2F%2Fapi.soundcloud.com%2Fplaylists%2F1620579250&show_artwork=false&show_comments=false"
+      style="top: 0; left: 0; width: 100; height: 200; position: absolute; border: 0;" allowfullscreen></iframe></div>
+
+  <p>Running list of chores~</p>
+  <ul>
+    <li>Make landing page</li>
+    <li>tweak quartz for aesthetics (if i feel crazy)</li>
+    <li>Actually figure out what i want to do in life</li>
+    <li>Music review cuz my taste the best</li>
+    <li>Guestbook??</li>
+  </ul>
+</body>
+
 </html>

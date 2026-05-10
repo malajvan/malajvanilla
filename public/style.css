@@ -1,3 +1,16 @@
+@font-face {
+    font-family: 'SaCrayonHandwriting';
+    src: url('fonts/SaCrayonHandwriting-Regular2.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'DonelliaDemoRegular';
+    src: url('fonts/DonelliaDemoRegular.ttf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
     margin: 0;
     width: 100vw;
@@ -35,4 +48,24 @@ body {
     pointer-events: none;
     z-index: 1000;
     white-space: normal;
+}
+
+h1 {
+    font-family: 'DonelliaDemoRegular', serif;
+    font-size: 4em;
+    /* Custom size for main title [23, 24] */
+}
+
+
+.coming-soon-regular {
+    font-family: "Coming Soon", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+
+h2,
+h3,
+p {
+font-family: "Arial", monospace;    font-size: 1em;
+    /* Custom size for main title [23, 24] */
 }
