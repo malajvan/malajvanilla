@@ -12,10 +12,9 @@
 }
 
 body {
-    margin: 0;
-    width: 100vw;
+    margin: 15px;
     min-height: 100vh;
-    overflow: auto;
+    overflow-x: hidden;
     cursor: url("./resources/cursor.png") 0 0, default;
 }
 
@@ -65,7 +64,7 @@ h1 {
 
 h2,
 h3,
-p {
+p, li {
 font-family: "Arial", monospace;    font-size: 1em;
     /* Custom size for main title [23, 24] */
 }

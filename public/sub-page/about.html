@@ -1,13 +1,60 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About — malajvanilla</title>
-    <link href="./style.css" rel="stylesheet" type="text/css" media="all">
-  </head>
-  <body>
-    <h1>About</h1>
-    <p><a href="./index.html">← back home</a></p>
-  </body>
+<style>
+  .bg-photo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../resources/home.JPG');
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+  }
+
+
+  .about-content {
+    max-width: 480px;
+  }
+</style>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — malajvanilla</title>
+  <link href="../style.css" rel="stylesheet" type="text/css" media="all">
+</head>
+
+<body>
+  <div class="bg-photo"></div>
+  <div class="about-overlay">
+    <div class="about-content">
+      <h1>About</h1>
+
+      <p>Current cute cool bae:</p>
+      <iframe style="border-radius:12px"
+        src="https://open.spotify.com/embed/track/3LKE4e9dILNUslrxHTaUaw?utm_source=generator" height="152" frameBorder="0"
+        allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy">
+      </iframe>
+      <p>
+        hallo world i am van. i do a lot of random things and this is one of them. malajvanilla is going to be infrequently
+        updated except for my
+      <a href="https://malajvanilla.neocities.org/journal">journal</a>. Stay tuned for more random shit!!
+      </p>
+      <p>Running list of chores~</p>
+      <ul>
+        <li>Build a shrine for something</li>
+        <li>Give character to each page</li>
+        <li>Actually figure out what i want to do in life</li>
+        <li>Music review cuz my taste the best</li>
+        <li>Guestbook??</li>
+      </ul>
+
+      <p><a href="../index.html">← back home</a></p>
+    </div>
+  </div>
+</body>
+
 </html>
